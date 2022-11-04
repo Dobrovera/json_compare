@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Vera Dobrodeeva <dobro.vera@gmail.com>"]
+packages = [
+  { include = "gendiff" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
