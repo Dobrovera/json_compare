@@ -11,4 +11,4 @@ package-install:
 gendiff:
 	poetry run python -m gendiff.scripts.gendiff --
 lint:
-    poetry run flake8 gendiff
+        poetry run flake8 gendiff
