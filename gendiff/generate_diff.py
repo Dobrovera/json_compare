@@ -81,7 +81,3 @@ def unpacking(diff_tree):
 
 def generate_diff(file_path1, file_path2):
     return unpacking(difference_tree(file_path1, file_path2))
-
-
-print(difference_tree('/home/vera/python-project-50/tests/fixtures/test_file1.json',
-                          '/home/vera/python-project-50/tests/fixtures/test_file2.json'))
