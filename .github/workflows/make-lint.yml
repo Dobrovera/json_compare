@@ -1,4 +1,4 @@
-name: make-lint
+name: linter
 on: push
 jobs:
   build:
@@ -6,12 +6,5 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      
-      - name: Poetry installing
-        run: pip install poetry
-
-      - name: make installing
-        run: make install 
- 
       - name: make lint
         run: make lint	
