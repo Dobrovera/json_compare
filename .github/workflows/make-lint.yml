@@ -1,0 +1,17 @@
+name: make-lint
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      
+      - name: Poetry installing
+        run: pip install poetry
+
+      - name: make installing
+        run: make install 
+ 
+      - name: make lint
+        run: make lint	
