@@ -66,7 +66,7 @@ def difference_tree(file_path1, file_path2):
 
 
 def unpacking(diff_tree):
-    answer = '{ \n'
+    answer = '{\n'
     for child in diff_tree:
         if child['value'] is True:
             child['value'] = 'true'
@@ -80,4 +80,4 @@ def unpacking(diff_tree):
 
 
 def generate_diff(file_path1, file_path2):
-    print(unpacking(difference_tree(file_path1, file_path2)))
+    return unpacking(difference_tree(file_path1, file_path2))
