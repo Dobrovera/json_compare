@@ -1,5 +1,5 @@
 from os import path
-from gendiff.generate_diff import difference_tree, generate_diff
+from gendiff.generate_diff import generate_diff
 
 
 def test_gendiff_json():
@@ -11,4 +11,3 @@ def test_gendiff_json():
                                "test_answer_json.txt"))
     with open(answer_str) as answer:
         assert generate_diff(file1, file2) == answer.read()
-
