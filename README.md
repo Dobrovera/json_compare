@@ -5,8 +5,11 @@
 [![linter](https://github.com/Dobrovera/python-project-50/actions/workflows/make-lint.yml/badge.svg)](https://github.com/Dobrovera/python-project-50/actions/workflows/make-lint.yml)
 
 ### Codeclimate
-<a href="https://codeclimate.com/github/Dobrovera/python-project-50/maintainability"><img src="https://api.codeclimate.com/v1/badges/53ed38a27c1ddd6515b2/maintainability" /></a>
+<a href="https://codeclimate.com/github/Dobrovera/python-project-50/maintainability"><img src="https://api.codeclimate.com/v1/badges/b781c7194aeb1bbbb189/maintainability" /></a>
 
+
+### Test Coverage
+<a href="https://codeclimate.com/github/Dobrovera/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/b781c7194aeb1bbbb189/test_coverage" /></a>
 
 
 ### Comparing two json files
