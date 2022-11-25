@@ -4,8 +4,8 @@ install: #установить зависимости
 build:
 	poetry build
 
-publish:
-	poetry publish --dry-run
+upgrage-pip:
+	python3 -m pip install --upgrade pip
 
 package-install:
 	python3 -m pip install --user --force dist/*.whl
