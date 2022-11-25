@@ -12,6 +12,8 @@ jobs:
         run: |
           pip install poetry flake8 pytest
           make install
+      - name: build
+        run: make build
       - name: make lint
         run: make lint
       - name: Run test
