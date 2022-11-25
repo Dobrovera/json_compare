@@ -16,6 +16,8 @@ jobs:
         run: make lint
       - name: Run test
         run: make test
+      - name: pytest-cov
+        run: make pytest-cov
       - name: test coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
