@@ -8,7 +8,7 @@ upgrage-pip:
 	python3 -m pip install --upgrade pip
 
 package-install:
-	python3 -m pip install --user --force dist/*.whl
+	python3 -m pip install --force dist/*.whl
 
 lint:
 	poetry run flake8 gendiff
@@ -20,4 +20,4 @@ pytest-cov:
 	pip install pytest-cov
 
 test-coverage:
-	pytest --cov=gendiff
+	pytest --cov=gendiff --cov-report xml
