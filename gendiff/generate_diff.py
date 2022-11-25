@@ -2,12 +2,15 @@
 
 
 import json
+import yaml
 import os
 
 
 def parse(data, format):
     if format == ".json":
         return json.load(data)
+    elif format == ".yml" or format == ".yaml":
+        return yaml.safe_load(data)
 
 
 def get_data(file_path):
