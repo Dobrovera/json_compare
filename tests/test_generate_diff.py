@@ -5,6 +5,10 @@ file1 = path.join(path.dirname("./tests/fixtures/"),
                   "test_file1.json")
 file2 = path.join(path.dirname("./tests/fixtures/"),
                   "test_file2.json")
+file1_yml = path.join(path.dirname("./tests/fixtures/"),
+                      "test_file1.yml")
+file2_yml = path.join(path.dirname("./tests/fixtures/"),
+                      "test_file2.yml")
 answer_str = str(path.join(path.dirname("./tests/fixtures/"),
                            "test_answer_json.txt"))
 tree = str(path.join(path.dirname("./tests/fixtures/"),
@@ -20,3 +24,8 @@ def test_tree_json():
     with open(tree) as tree_dif:
         file_data = tree_dif.read()
         assert str(difference_tree(file1, file2)) == file_data
+
+
+def test_gendiff_yml():
+    with open(answer_str) as answer:
+        assert generate_diff(file1_yml, file2_yml) == answer.read()
