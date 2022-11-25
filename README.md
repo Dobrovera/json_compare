@@ -15,4 +15,10 @@
 ### Comparing two json files
  ***command: gendiff filepath1.json filepath2.json
 
-[![asciicast](https://asciinema.org/a/539203.svg)](https://asciinema.org/a/539203)
+[![asciicast](https://asciinema.org/a/540252.svg)](https://asciinema.org/a/540252)
+
+
+### Comparing two yaml files
+ ***command: gendiff filepath1.yaml filepath2.yaml
+
+[![asciicast](https://asciinema.org/a/540253.svg)](https://asciinema.org/a/540253)
