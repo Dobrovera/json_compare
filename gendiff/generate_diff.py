@@ -29,42 +29,48 @@ def difference_tree(file_path1, file_path2):
     space = "  "
     diff_tree = []
     for key in files:
-        # Проверяем все ключи из объединенного списка
-        if key in file_1 and key in file_2:
-            # Если ключ в обоих файлах
-            if file_1[key] == file_2[key]:
-                # И значения равны
-                diff_tree.append({
-                    "key": key,
-                    "sign": space,
-                    "value": file_1[key]
-                })
-            else:
-                # Если значения не равны
-                diff_tree.append({
-                    "key": key,
-                    "sign": in_first_file,
-                    "value": file_1[key]
-                })
-                diff_tree.append({
-                    "key": key,
-                    "sign": in_second_file,
-                    "value": file_2[key]
-                })
+    # Проверяем все ключи из объединенного списка
         if key in file_1 and key not in file_2:
-            # Если ключ есть только в первом файле
+        # Если ключ есть только в первом файле
             diff_tree.append({
                 "key": key,
                 "sign": in_first_file,
                 "value": file_1[key]
             })
         elif key in file_2 and key not in file_1:
-            # Если ключ есть только во втором файле
+        # Если ключ есть только во втором файле
             diff_tree.append({
                 "key": key,
                 "sign": in_second_file,
                 "value": file_2[key]
             })
+        elif key in file_1 and key in file_2:
+        # Если ключ в обоих файлах
+            value1 = str(file_1[key])
+            value2 = str(file_2[key])
+            if value1[0] == "{" and value2[0] == "{":
+            # Если значения по ключу словари
+                print("Hi")
+            else:
+                if file_1[key] == file_2[key]:
+                # Значения не словари и значения равны
+                    diff_tree.append({
+                        "key": key,
+                        "sign": space,
+                        "value": file_1[key]
+                    })
+                else:
+                # Если значения не равны
+                    diff_tree.append({
+                        "key": key,
+                        "sign": in_first_file,
+                        "value": file_1[key]
+                    })
+                    diff_tree.append({
+                        "key": key,
+                        "sign": in_second_file,
+                        "value": file_2[key]
+                    })
     return diff_tree
 
 
