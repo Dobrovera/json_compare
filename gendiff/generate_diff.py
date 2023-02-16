@@ -141,4 +141,3 @@ def unpacking(diff_tree, lvl=1):
 def generate_diff(file_path1, file_path2):
     result = difference_tree(file_path1, file_path2)
     return unpacking(result)
-
