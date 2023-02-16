@@ -22,3 +22,7 @@
  ***command: gendiff filepath1.yaml filepath2.yaml
 
 [![asciicast](https://asciinema.org/a/540253.svg)](https://asciinema.org/a/540253)
+
+###Comparing files with nested structures
+
+[![asciicast](https://asciinema.org/a/560284.svg)](https://asciinema.org/a/560284)
