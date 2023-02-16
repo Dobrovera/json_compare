@@ -76,6 +76,7 @@ def do_things(files, file_1, file_2):
                         "sign": in_second_file,
                         "value": file_2[key]
                     })
+    print(diff_tree)
     return diff_tree
 
 

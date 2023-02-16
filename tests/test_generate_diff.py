@@ -13,6 +13,12 @@ answer_str = str(path.join(path.dirname("./tests/fixtures/"),
                            "test_answer_json.txt"))
 tree = str(path.join(path.dirname("./tests/fixtures/"),
                      "tree_json.txt"))
+nested_yml_1 = path.join(path.dirname("./tests/fixtures/"),
+                         "test_file_nested1.yml")
+nested_yml_2 = path.join(path.dirname("./tests/fixtures/"),
+                         "test_file_nested2.yml")
+nested_tree = str(path.join(path.dirname("./tests/fixtures/"),
+                            "tree_nested.txt"))
 
 
 def test_gendiff_json():
@@ -29,3 +35,9 @@ def test_tree_json():
 def test_gendiff_yml():
     with open(answer_str) as answer:
         assert generate_diff(file1_yml, file2_yml) == answer.read()
+
+
+def test_nested():
+    with open(nested_tree) as tr:
+        file_data = tr.read()
+        assert str(difference_tree(nested_yml_1, nested_yml_2)) == file_data
