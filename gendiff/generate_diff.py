@@ -5,7 +5,7 @@ import json
 import yaml
 import os
 from gendiff.plain import plain
-
+from gendiff.stylish import slylish
 
 def parse(data, format):
     if format == ".json":
