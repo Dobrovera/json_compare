@@ -1,5 +1,6 @@
 from os import path
 from gendiff.generate_diff import generate_diff, difference_tree
+from gendiff.plain import plain
 
 file1 = path.join(path.dirname("./tests/fixtures/"),
                   "test_file1.json")
@@ -11,6 +12,8 @@ file2_yml = path.join(path.dirname("./tests/fixtures/"),
                       "test_file2.yml")
 answer_str = str(path.join(path.dirname("./tests/fixtures/"),
                            "test_answer_json.txt"))
+answer_flat = str(path.join(path.dirname("./tests/fixtures/"),
+                           "answer_flat.txt"))
 tree = str(path.join(path.dirname("./tests/fixtures/"),
                      "tree_json.txt"))
 nested_yml_1 = path.join(path.dirname("./tests/fixtures/"),
@@ -41,3 +44,8 @@ def test_nested():
     with open(nested_tree) as tr:
         file_data = tr.read()
         assert str(difference_tree(nested_yml_1, nested_yml_2)) == file_data
+
+
+def test_flat():
+    with open(answer_flat) as an:
+        assert generate_diff(nested_yml_1, nested_yml_2, format_name=plain) == an.read()
