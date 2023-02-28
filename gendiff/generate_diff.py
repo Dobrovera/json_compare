@@ -4,8 +4,8 @@
 import json
 import yaml
 import os
-from gendiff.plain import plain
 from gendiff.stylish import slylish
+
 
 def parse(data, format):
     if format == ".json":
@@ -88,7 +88,7 @@ def difference_tree(file_path1, file_path2):
     return do_things(files, file_1, file_2)
 
 
-def generate_diff(file_path1, file_path2, format_name=plain):
+def generate_diff(file_path1, file_path2, format_name=slylish):
     result = difference_tree(file_path1, file_path2)
     r = format_name(result)
     return r

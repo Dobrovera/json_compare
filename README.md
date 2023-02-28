@@ -26,3 +26,8 @@
 ### Comparing files with nested structures
 
 [![asciicast](https://asciinema.org/a/560284.svg)](https://asciinema.org/a/560284)
+
+
+### flat format
+
+[![asciicast](https://asciinema.org/a/563624.svg)](https://asciinema.org/a/563624)

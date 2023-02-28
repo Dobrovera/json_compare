@@ -57,7 +57,8 @@ def new_dict_updated(diff_tree, keys={}):
 def make_answer(new_tree, ud, diff_tree, answer=''):
     tree = copy.deepcopy(diff_tree)
     for i in tree:
-        if i['value'] not in ['true', 'false', 'null', '[complex value]'] and isinstance(i['value'], str):
+        if i['value'] not in ['true', 'false', 'null', '[complex value]'] \
+                and isinstance(i['value'], str):
             i["value"] = '\'' + i['value'] + '\''
         if isinstance(i['value'], dict):
             i['value'] = complex
@@ -69,10 +70,11 @@ def make_answer(new_tree, ud, diff_tree, answer=''):
             answer += "\n"
         elif i['sign'] == '+' and i['key'] in ud:
             key = i['key']
-
-            if ud[key][0] not in ['true', 'false', 'null', '[complex value]'] and isinstance(ud[key][0], str):
+            if ud[key][0] not in ['true', 'false', 'null', '[complex value]'] \
+                    and isinstance(ud[key][0], str):
                 ud[key][0] = '\'' + ud[key][0] + '\''
-            if ud[key][1] not in ['true', 'false', 'null', '[complex value]'] and isinstance(ud[key][1], str):
+            if ud[key][1] not in ['true', 'false', 'null', '[complex value]'] \
+                    and isinstance(ud[key][1], str):
                 ud[key][1] = '\'' + ud[key][1] + '\''
 
             answer += f"{pro} '{i['path']}' {update}{ud[key][0]} to " \
