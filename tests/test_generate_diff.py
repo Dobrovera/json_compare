@@ -1,6 +1,7 @@
 from os import path
 from gendiff.generate_diff import generate_diff, difference_tree
-from gendiff.plain import plain
+import sys
+from gendiff.argument_parser import argument_parser
 
 file1 = path.join(path.dirname("./tests/fixtures/"),
                   "test_file1.json")
@@ -49,3 +50,12 @@ def test_nested():
 def test_flat():
     with open(answer_flat) as an:
         assert generate_diff(nested_yml_1, nested_yml_2, format_name='plain') == an.read()
+
+
+
+def test_arg_parse():
+    sys.argv = ['gendiff', '--format', 'plain', 'file1.json', 'file2.json']
+    args = argument_parser()
+    assert args.first_file == 'file1.json'
+    assert args.second_file == 'file2.json'
+    assert args.format == 'plain'

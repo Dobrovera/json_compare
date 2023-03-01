@@ -37,10 +37,8 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
             answer += slylish(child['value'], lvl + 2)
             answer += '\n'
         elif isinstance(child["value"], dict):
-            # answer += "{\n"
             answer += f"{lvl * tab}{child['sign']} {child['key']}: "
             r = unpack_dict(child['value'], lvl*tab, lvl)
-            # r = json.dumps(child['value'], sort_keys=True, indent=4)
             answer += r
             answer += '\n'
         else:
