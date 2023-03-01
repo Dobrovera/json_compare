@@ -37,7 +37,7 @@ def test_tree_json():
 
 def test_gendiff_yml():
     with open(answer_str) as answer:
-        assert generate_diff(file1_yml, file2_yml) == answer.read()
+        assert generate_diff(file1_yml, file2_yml, format_name='stylish') == answer.read()
 
 
 def test_nested():
@@ -48,4 +48,4 @@ def test_nested():
 
 def test_flat():
     with open(answer_flat) as an:
-        assert generate_diff(nested_yml_1, nested_yml_2, format_name=plain) == an.read()
+        assert generate_diff(nested_yml_1, nested_yml_2, format_name='plain') == an.read()
