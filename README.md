@@ -62,3 +62,10 @@ Command ```gendiff --format plain filepath1.yaml filepath2.yaml``` //
 Formatter plain
 
 [![asciicast](https://asciinema.org/a/563624.svg)](https://asciinema.org/a/563624)
+
+
+### JSON format
+Command ```gendiff --format json filepath1.yaml filepath2.yaml``` //
+Formatter json
+
+[![asciicast](https://asciinema.org/a/563880.svg)](https://asciinema.org/a/563880)

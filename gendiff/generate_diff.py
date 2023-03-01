@@ -6,6 +6,7 @@ import yaml
 import os
 from gendiff.stylish import slylish
 from gendiff.plain import plain
+from gendiff.json import f_json
 
 
 def parse(data, format):
@@ -95,3 +96,5 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         return slylish(result)
     elif format_name == "plain":
         return plain(result)
+    elif format_name == 'json':
+        return f_json(result)
