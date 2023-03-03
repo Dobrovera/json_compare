@@ -16,7 +16,7 @@ answer_str = str(path.join(path.dirname("./tests/fixtures/"),
 answer_flat = str(path.join(path.dirname("./tests/fixtures/"),
                             "answer_flat.txt"))
 tree = str(path.join(path.dirname("./tests/fixtures/"),
-                        "tree_json.txt"))
+                     "tree_json.txt"))
 nested_yml_1 = path.join(path.dirname("./tests/fixtures/"),
                          "test_file_nested1.yml")
 nested_yml_2 = path.join(path.dirname("./tests/fixtures/"),
