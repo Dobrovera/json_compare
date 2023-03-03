@@ -56,7 +56,7 @@ def new_dict_updated(diff_tree, keys={}):
 def make_answer(new_tree, ud, diff_tree, answer=''):
     tree = copy.deepcopy(diff_tree)
     for i in tree:
-        if i['value'] not in ['true', 'false', 'null', '[COMPLEX value]'] \
+        if i['value'] not in ['true', 'false', 'null', '[complex value]'] \
                 and isinstance(i['value'], str):
             i["value"] = '\'' + i['value'] + '\''
         if isinstance(i['value'], dict):
