@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 import copy
 
-added = "was added with value: "
-remove = "was removed"
-update = "was updated. From "
-pro = "Property"
-complex = "[complex value]"
+ADDED = "was addeed with value: "
+REMOVE = "was removed"
+UPDATE = "was updated. From "
+PRO = "Property"
+COMPLEX = "[complex value]"
 
 
 def diff_tree_path(diff_tree, curr_path=''):
@@ -39,12 +38,12 @@ def new_dict_updated(diff_tree, keys={}):
             key = i['key']
             if i["key"] not in keys and i['sign'] != " ":
                 if isinstance(i['value'], dict):
-                    keys[key] = [complex]
+                    keys[key] = [COMPLEX]
                 else:
                     keys[key] = [i['value']]
             elif i["key"] in keys:
                 if isinstance(i['value'], dict):
-                    keys[key].append(complex)
+                    keys[key].append(COMPLEX)
                 else:
                     keys[key].append(i['value'])
     updated = {}
@@ -57,27 +56,27 @@ def new_dict_updated(diff_tree, keys={}):
 def make_answer(new_tree, ud, diff_tree, answer=''):
     tree = copy.deepcopy(diff_tree)
     for i in tree:
-        if i['value'] not in ['true', 'false', 'null', '[complex value]'] \
+        if i['value'] not in ['true', 'false', 'null', '[COMPLEX value]'] \
                 and isinstance(i['value'], str):
             i["value"] = '\'' + i['value'] + '\''
         if isinstance(i['value'], dict):
-            i['value'] = complex
+            i['value'] = COMPLEX
         if i['sign'] == '-' and i['key'] not in ud:
-            answer += f"{pro} '{i['path']}' {remove}"
+            answer += f"{PRO} '{i['path']}' {REMOVE}"
             answer += "\n"
         elif i['sign'] == '+' and i['key'] not in ud:
-            answer += f"{pro} '{i['path']}' {added}{i['value']}"
+            answer += f"{PRO} '{i['path']}' {ADDED}{i['value']}"
             answer += "\n"
         elif i['sign'] == '+' and i['key'] in ud:
             key = i['key']
-            if ud[key][0] not in ['true', 'false', 'null', '[complex value]'] \
+            if ud[key][0] not in ['true', 'false', 'null', '[COMPLEX value]'] \
                     and isinstance(ud[key][0], str):
                 ud[key][0] = '\'' + ud[key][0] + '\''
-            if ud[key][1] not in ['true', 'false', 'null', '[complex value]'] \
+            if ud[key][1] not in ['true', 'false', 'null', '[COMPLEX value]'] \
                     and isinstance(ud[key][1], str):
                 ud[key][1] = '\'' + ud[key][1] + '\''
 
-            answer += f"{pro} '{i['path']}' {update}{ud[key][0]} to " \
+            answer += f"{PRO} '{i['path']}' {UPDATE}{ud[key][0]} to " \
                       f"{ud[key][1]}"
             answer += "\n"
         elif i['sign'] == ' ':

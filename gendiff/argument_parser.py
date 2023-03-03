@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
-
 import argparse
 
 
-def argument_parser():
+def argument_parsing():
     """display help information"""
     parser = argparse.ArgumentParser(prog='gendiff',
                                      description='Compares two '

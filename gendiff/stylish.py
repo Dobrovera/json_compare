@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-
 def unpack_dict(d, base_tab, lvl=1):
     tab = '    '
     answer = '{\n'
