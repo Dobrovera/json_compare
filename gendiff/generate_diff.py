@@ -82,16 +82,16 @@ def build_tree_structure(files, file_1, file_2):
 
 
 def get_difference_tree(file_path1, file_path2):
-    files = sorted(list(set(get_data(file_path1).keys()) |
-                        set(get_data(file_path2).keys())))
+    files = sorted(list(set(get_data(file_path1).keys())
+                        | set(get_data(file_path2).keys())))
     file_1 = dict(sorted(get_data(file_path1).items()))
     file_2 = dict(sorted(get_data(file_path2).items()))
     return build_tree_structure(files, file_1, file_2)
 
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
-    files = sorted(list(set(get_data(file_path1).keys()) |
-                        set(get_data(file_path2).keys())))
+    files = sorted(list(set(get_data(file_path1).keys())
+                        | set(get_data(file_path2).keys())))
     file_1 = dict(sorted(get_data(file_path1).items()))
     file_2 = dict(sorted(get_data(file_path2).items()))
     result = build_tree_structure(files, file_1, file_2)

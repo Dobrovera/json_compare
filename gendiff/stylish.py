@@ -45,5 +45,5 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
     if lvl == 1:
         answer += '}'
     else:
-        answer += f"{(lvl-1) * tab}" + '}'
+        answer += f"{(lvl - 1) * tab}" + '}'
     return answer
