@@ -14,9 +14,9 @@ file2_yml = path.join(path.dirname("./tests/fixtures/"),
 answer_str = str(path.join(path.dirname("./tests/fixtures/"),
                            "test_answer_json.txt"))
 answer_flat = str(path.join(path.dirname("./tests/fixtures/"),
-                           "answer_flat.txt"))
+                            "answer_flat.txt"))
 tree = str(path.join(path.dirname("./tests/fixtures/"),
-                     "tree_json.txt"))
+                        "tree_json.txt"))
 nested_yml_1 = path.join(path.dirname("./tests/fixtures/"),
                          "test_file_nested1.yml")
 nested_yml_2 = path.join(path.dirname("./tests/fixtures/"),
@@ -50,7 +50,6 @@ def test_nested():
 def test_flat():
     with open(answer_flat) as an:
         assert generate_diff(nested_yml_1, nested_yml_2, format_name='plain') == an.read()
-
 
 
 def test_arg_parse():
