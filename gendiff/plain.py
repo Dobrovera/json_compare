@@ -50,7 +50,6 @@ def new_dict_updated(diff_tree, keys={}):
     for key in keys:
         if len(keys[key]) == 2:
             updated[key] = keys[key]
-    print(updated)
     return updated
 
 
@@ -91,4 +90,4 @@ def plain(diff_tree):
     new_tree = diff_tree_path(diff_tree)
     ud = new_dict_updated(new_tree)
     answer = make_answer(new_tree, ud, diff_tree)
-    return answer
+    return answer.rstrip()
