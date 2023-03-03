@@ -1,6 +1,6 @@
 import copy
 
-ADDED = "was addeed with value: "
+ADDED = "was added with value: "
 REMOVE = "was removed"
 UPDATE = "was updated. From "
 PRO = "Property"
@@ -69,10 +69,10 @@ def make_answer(new_tree, ud, diff_tree, answer=''):
             answer += "\n"
         elif i['sign'] == '+' and i['key'] in ud:
             key = i['key']
-            if ud[key][0] not in ['true', 'false', 'null', '[COMPLEX value]'] \
+            if ud[key][0] not in ['true', 'false', 'null', '[complex value]'] \
                     and isinstance(ud[key][0], str):
                 ud[key][0] = '\'' + ud[key][0] + '\''
-            if ud[key][1] not in ['true', 'false', 'null', '[COMPLEX value]'] \
+            if ud[key][1] not in ['true', 'false', 'null', '[complex value]'] \
                     and isinstance(ud[key][1], str):
                 ud[key][1] = '\'' + ud[key][1] + '\''
 
