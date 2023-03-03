@@ -23,7 +23,9 @@ def diff_tree_path(diff_tree, curr_path=''):
     return diff_tree
 
 
-def new_dict_updated(diff_tree, keys={}):
+def new_dict_updated(diff_tree, keys=None):
+    if keys is None:
+        keys = {}
     for i in diff_tree:
         if i['value'] is True:
             i['value'] = 'true'
