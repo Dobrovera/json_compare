@@ -35,13 +35,13 @@ def new_dict_updated(diff_tree, keys={}):
             child = i['value']
             new_dict_updated(child, keys)
         else:
-            key = i['key']
-            if i["key"] not in keys and i['sign'] != " ":
+            key = i['path']
+            if i['path'] not in keys and i['sign'] != " ":
                 if isinstance(i['value'], dict):
                     keys[key] = [COMPLEX]
                 else:
                     keys[key] = [i['value']]
-            elif i["key"] in keys:
+            elif i['path'] in keys:
                 if isinstance(i['value'], dict):
                     keys[key].append(COMPLEX)
                 else:
@@ -50,6 +50,7 @@ def new_dict_updated(diff_tree, keys={}):
     for key in keys:
         if len(keys[key]) == 2:
             updated[key] = keys[key]
+    print(updated)
     return updated
 
 
@@ -61,14 +62,14 @@ def make_answer(new_tree, ud, diff_tree, answer=''):
             i["value"] = '\'' + i['value'] + '\''
         if isinstance(i['value'], dict):
             i['value'] = COMPLEX
-        if i['sign'] == '-' and i['key'] not in ud:
+        if i['sign'] == '-' and i['path'] not in ud:
             answer += f"{PRO} '{i['path']}' {REMOVE}"
             answer += "\n"
-        elif i['sign'] == '+' and i['key'] not in ud:
+        elif i['sign'] == '+' and i['path'] not in ud:
             answer += f"{PRO} '{i['path']}' {ADDED}{i['value']}"
             answer += "\n"
-        elif i['sign'] == '+' and i['key'] in ud:
-            key = i['key']
+        elif i['sign'] == '+' and i['path'] in ud:
+            key = i['path']
             if ud[key][0] not in ['true', 'false', 'null', '[complex value]'] \
                     and isinstance(ud[key][0], str):
                 ud[key][0] = '\'' + ud[key][0] + '\''
