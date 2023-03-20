@@ -21,3 +21,6 @@ pytest-cov:
 
 test-coverage:
 	pytest --cov=gendiff --cov-report xml
+
+pyyaml:
+	pip install pyyaml
