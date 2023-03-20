@@ -6,11 +6,6 @@ from gendiff.plain import plain
 from gendiff.json import f_json
 
 
-IN_FIRST_FILE = "-"
-IN_SECOND_FILE = "+"
-SPACE = " "
-
-
 def parse(data, format):
     if format == ".json":
         return json.load(data)
@@ -32,29 +27,25 @@ def build_tree_structure(files, file_1, file_2):
             # Если ключ есть только в первом файле
             diff_tree.append({
                 "key": key,
-                "sign": IN_FIRST_FILE,
+                "status": 'removed',
                 "value": file_1[key],
             })
         elif key in file_2 and key not in file_1:
             # Если ключ есть только во втором файле
             diff_tree.append({
                 "key": key,
-                "sign": IN_SECOND_FILE,
+                "status": 'added',
                 "value": file_2[key]
             })
         elif key in file_1 and key in file_2:
             # Если ключ в обоих файлах
-            value1 = file_1[key]
-            value2 = file_2[key]
-            if isinstance(value1, dict) and isinstance(value2, dict):
+            if isinstance(file_1[key], dict) and isinstance(file_2[key], dict):
                 # Если значения по ключу словари
-                f_1 = value1
-                f_2 = value2
-                fls = sorted(list(set(f_1) | set(f_2)))
-                result = build_tree_structure(fls, f_1, f_2)
+                fls = sorted(list(set(file_1[key]) | set(file_2[key])))
+                result = build_tree_structure(fls, file_1[key], file_2[key])
                 diff_tree.append({
                     "key": key,
-                    "sign": SPACE,
+                    "status": 'nested',
                     "value": result
                 })
 
@@ -63,20 +54,16 @@ def build_tree_structure(files, file_1, file_2):
                     # Значения не словари и значения равны
                     diff_tree.append({
                         "key": key,
-                        "sign": SPACE,
+                        "status": 'unchanged',
                         "value": file_1[key]
                     })
                 else:
                     # Если значения не равны
                     diff_tree.append({
                         "key": key,
-                        "sign": IN_FIRST_FILE,
-                        "value": file_1[key]
-                    })
-                    diff_tree.append({
-                        "key": key,
-                        "sign": IN_SECOND_FILE,
-                        "value": file_2[key]
+                        "status": 'changed',
+                        "value": file_1[key],
+                        "value_2": file_2[key]
                     })
     return diff_tree
 
