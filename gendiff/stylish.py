@@ -1,13 +1,13 @@
-def unpack_dict(d, base_tab, lvl=1):
+def unpack_dict(d, lvl=1):
     tab = '    '
     answer = '{\n'
     for key, val in d.items():
         if isinstance(val, dict):
             if lvl == 1:
                 lvl += 1
-                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl*tab, lvl+1)}"
+                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
             else:
-                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl*tab, lvl+1)}"
+                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
             answer += r
         else:
             if lvl == 1:
@@ -34,7 +34,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
             # И содержит словарь
             if type(child['value']) is dict:
                 answer += f"{lvl * tab}- {child['key']}: "
-                r = unpack_dict(child['value'], lvl * tab, lvl)
+                r = unpack_dict(child['value'], lvl)
                 answer += r
                 answer += '\n'
             else:
@@ -46,7 +46,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
             # И содержит словарь
             if type(child['value']) is dict:
                 answer += f"{lvl * tab}+ {child['key']}: "
-                r = unpack_dict(child['value'], lvl * tab, lvl)
+                r = unpack_dict(child['value'], lvl)
                 answer += r
                 answer += '\n'
             else:
@@ -64,13 +64,13 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
             # И содержит словарь в первом файле
             if type(child['value']) is dict:
                 answer += f"{lvl * tab}+ {child['key']}: "
-                r = unpack_dict(child['value'], lvl * tab, lvl)
+                r = unpack_dict(child['value'], lvl)
                 answer += r
                 answer += '\n'
             # Или во втором
             elif type(child['value_2']) is dict:
                 answer += f"{lvl * tab}+ {child['key']}: "
-                r = unpack_dict(child['value_2'], lvl * tab, lvl)
+                r = unpack_dict(child['value_2'], lvl)
                 answer += r
                 answer += '\n'
             else:
@@ -90,7 +90,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
             # И содержит словарь
             if type(child['value']) is dict:
                 answer += f"{lvl * tab}  {child['key']}: "
-                r = unpack_dict(child['value'], lvl * tab, lvl)
+                r = unpack_dict(child['value'], lvl)
                 answer += r
                 answer += '\n'
             else:

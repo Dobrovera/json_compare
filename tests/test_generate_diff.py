@@ -3,6 +3,7 @@ from os import path
 from gendiff.generate_diff import generate_diff, get_difference_tree
 import sys
 from gendiff.argument_parser import argument_parsing
+from gendiff.stylish import unpack_dict
 
 file1_yml = path.join(path.dirname("./tests/fixtures/"),
                       "test_file1.yml")
@@ -20,6 +21,8 @@ nested_yml_2 = path.join(path.dirname("./tests/fixtures/"),
                          "test_file_nested2.yml")
 nested_tree = str(path.join(path.dirname("./tests/fixtures/"),
                             "tree_nested.txt"))
+answer_unpack_dict = str(path.join(path.dirname("./tests/fixtures/"),
+                            "test_unpack_dict.txt"))
 
 
 def test_gendiff_yml():
@@ -42,3 +45,11 @@ def test_arg_parse():
     assert args.first_file == 'file1.json'
     assert args.second_file == 'file2.json'
     assert args.format == 'plain'
+
+
+def test_unpack_dict():
+    with open(answer_unpack_dict) as answer:
+        data = answer.read()
+        lvl = 2
+        child = {'deep': {'id': {'number': 45}}, 'fee': 100500}
+        assert unpack_dict(child, lvl) == data
