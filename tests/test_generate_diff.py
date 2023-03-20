@@ -25,13 +25,15 @@ answer_unpack_dict = str(path.join(path.dirname("./tests/fixtures/"),
                             "test_unpack_dict.txt"))
 
 
-def test_gendiff_yml():
-    with open(answer_str) as answer:
-        assert generate_diff(file1_yml, file2_yml, format_name='stylish') == answer.read()
-    with open(answer_flat) as an:
-        assert generate_diff(nested_yml_1, nested_yml_2, format_name='plain') == an.read()
-    with open(answer_json) as a:
-        assert generate_diff(nested_yml_1, nested_yml_2, format_name='json') == a.read()
+@pytest.mark.parametrize("file1,file2,extension,expected", [
+    ('./tests/fixtures/test_file1.yml', './tests/fixtures/test_file2.yml', 'stylish',
+     './tests/fixtures/test_answer_json.txt'),
+    ('./tests/fixtures/test_file_nested1.yml', './tests/fixtures/test_file_nested2.yml',
+     'plain', './tests/fixtures/answer_flat.txt'),
+    ('./tests/fixtures/test_file_nested1.yml', './tests/fixtures/test_file_nested2.yml',
+     'json', './tests/fixtures/test_json.txt')])
+def test_gendiff(file1, file2, extension, expected):
+    assert generate_diff(file1, file2, extension) == open(expected).read()
 
 
 def test_nested():
