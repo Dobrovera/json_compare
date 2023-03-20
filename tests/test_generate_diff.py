@@ -33,6 +33,7 @@ def test_gendiff_yml():
     with open(answer_json) as a:
         assert generate_diff(nested_yml_1, nested_yml_2, format_name='json') == a.read()
 
+
 def test_nested():
     with open(nested_tree) as tr:
         file_data = tr.read()

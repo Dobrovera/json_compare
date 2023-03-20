@@ -47,8 +47,8 @@
                             {
                                 "key": "wow",
                                 "status": "changed",
-                                "value": "",
-                                "value_2": "so much"
+                                "value": null,
+                                "value_2": false
                             }
                         ]
                     },
