@@ -63,12 +63,18 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
                 child['value_2'] = 'null'
             # И содержит словарь в первом файле
             if type(child['value']) is dict:
-                answer += f"{lvl * tab}+ {child['key']}: "
+                answer += f"{lvl * tab}- {child['key']}: "
                 r = unpack_dict(child['value'], lvl)
                 answer += r
                 answer += '\n'
+                answer += f"{lvl * tab}+ {child['key']}: " \
+                          f"{child['value_2']}"
+                answer += '\n'
             # Или во втором
             elif type(child['value_2']) is dict:
+                answer += f"{lvl * tab}- {child['key']}: " \
+                          f"{child['value']}"
+                answer += '\n'
                 answer += f"{lvl * tab}+ {child['key']}: "
                 r = unpack_dict(child['value_2'], lvl)
                 answer += r
