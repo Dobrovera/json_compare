@@ -39,7 +39,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
                 answer += '\n'
             else:
                 answer += f"{lvl * tab}- {child['key']}: " \
-                      f"{child['value']}"
+                          f"{child['value']}"
                 answer += '\n'
         # Если ключ был добавлен во второй файл
         elif child['status'] == 'added':
@@ -51,7 +51,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
                 answer += '\n'
             else:
                 answer += f"{lvl * tab}+ {child['key']}: " \
-                      f"{child['value']}"
+                          f"{child['value']}"
                 answer += '\n'
         # Если ключ поменялся
         elif child['status'] == 'changed':
@@ -81,7 +81,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
                 answer += '\n'
             else:
                 answer += f"{lvl * tab}- {child['key']}: " \
-                      f"{child['value']}"
+                          f"{child['value']}"
                 answer += '\n'
                 answer += f"{lvl * tab}+ {child['key']}: " \
                           f"{child['value_2']}"
@@ -101,7 +101,7 @@ def slylish(diff_tree: object, lvl: object = 1) -> object:
                 answer += '\n'
             else:
                 answer += f"{lvl * tab}  {child['key']}: " \
-                         f"{child['value']}"
+                          f"{child['value']}"
                 answer += '\n'
     if lvl == 1:
         answer += '}'
