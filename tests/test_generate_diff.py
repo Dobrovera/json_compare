@@ -22,7 +22,7 @@ nested_yml_2 = path.join(path.dirname("./tests/fixtures/"),
 nested_tree = str(path.join(path.dirname("./tests/fixtures/"),
                             "tree_nested.txt"))
 answer_unpack_dict = str(path.join(path.dirname("./tests/fixtures/"),
-                            "test_unpack_dict.txt"))
+                                   "test_unpack_dict.txt"))
 
 
 @pytest.mark.parametrize("file1,file2,extension,expected", [
