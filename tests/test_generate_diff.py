@@ -27,13 +27,13 @@ answer_unpack_dict = str(path.join(path.dirname("./tests/fixtures/"),
 
 @pytest.mark.parametrize("file1,file2,extension,expected", [
     ('./tests/fixtures/test_file1.yml', './tests/fixtures/test_file2.yml', 'stylish',
-    './tests/fixtures/test_answer_json.txt'),
+     './tests/fixtures/test_answer_json.txt'),
     ('./tests/fixtures/test_file_nested1.yml', './tests/fixtures/test_file_nested2.yml', 'stylish',
-    './tests/fixtures/test_tree_nested.txt'),
+     './tests/fixtures/test_tree_nested.txt'),
     ('./tests/fixtures/test_file_nested1.yml', './tests/fixtures/test_file_nested2.yml',
-    'plain', './tests/fixtures/answer_flat.txt'),
+     'plain', './tests/fixtures/answer_flat.txt'),
     ('./tests/fixtures/test_file_nested1.yml', './tests/fixtures/test_file_nested2.yml',
-    'json', './tests/fixtures/test_json.txt')])
+     'json', './tests/fixtures/test_json.txt')])
 def test_gendiff(file1, file2, extension, expected):
     assert generate_diff(file1, file2, extension) == open(expected).read()
 
