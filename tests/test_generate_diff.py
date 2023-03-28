@@ -1,5 +1,4 @@
 import pytest
-from os import path
 from gendiff.generate_diff import generate_diff
 import sys
 from gendiff.argument_parser import arg_parse
