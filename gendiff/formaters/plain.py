@@ -27,8 +27,8 @@ def make_answer(diff_tree_with_path, answer='', curr_path=''):
             answer += "\n"
         elif node['status'] == 'changed':
             answer += f"{PRO} '{curr_path + node['key']}' {UPDATE}" \
-                      f"{format_value(node['value'])}" \
-                      f" to {format_value(node['value_2'])}"
+                      f"{format_value(node['old_value'])}" \
+                      f" to {format_value(node['new_value'])}"
             answer += "\n"
         elif node['status'] == 'nested':
             answer = make_answer(diff_tree_with_path=node['value'],

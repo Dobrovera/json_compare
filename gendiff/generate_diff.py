@@ -61,8 +61,8 @@ def build_tree_structure(files, file_1, file_2):
                 diff_tree.append({
                     "key": key,
                     "status": 'changed',
-                    "value": file_1[key],
-                    "value_2": file_2[key]
+                    "old_value": file_1[key],
+                    "new_value": file_2[key]
                 })
     return diff_tree
 

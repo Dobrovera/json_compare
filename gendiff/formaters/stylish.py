@@ -55,28 +55,28 @@ def get_answer_str(diff_tree, lvl=1):
         # Если ключ поменялся
         if child['status'] == 'changed':
             # И содержит словарь в первом файле
-            if type(child['value']) is dict:
+            if type(child['old_value']) is dict:
                 answer += f"{lvl * tab}- {child['key']}: "
-                answer += unpack_dict(child['value'], lvl)
-                answer += '\n'
-                answer += f"{lvl * tab}+ {child['key']}: " \
-                          f"{format_value(child['value_2'])}"
-                answer += '\n'
-            # Или во втором
-            elif type(child['value_2']) is dict:
-                answer += f"{lvl * tab}- {child['key']}: " \
-                          f"{format_value(child['value'])}"
+                answer += unpack_dict(child['old_value'], lvl)
                 answer += '\n'
                 answer += f"{lvl * tab}+ {child['key']}: "
-                answer += unpack_dict(child['value_2'], lvl)
+                answer += f"{format_value(child['new_value'])}"
+                answer += '\n'
+            # Или во втором
+            elif type(child['new_value']) is dict:
+                answer += f"{lvl * tab}- {child['key']}: "
+                answer += f"{format_value(child['old_value'])}"
+                answer += '\n'
+                answer += f"{lvl * tab}+ {child['key']}: "
+                answer += unpack_dict(child['new_value'], lvl)
                 answer += '\n'
             # Или не содержит словарей
             else:
-                answer += f"{lvl * tab}- {child['key']}: " \
-                      f"{format_value(child['value'])}"
+                answer += f"{lvl * tab}- {child['key']}: "
+                answer += f"{format_value(child['old_value'])}"
                 answer += '\n'
-                answer += f"{lvl * tab}+ {child['key']}: " \
-                          f"{format_value(child['value_2'])}"
+                answer += f"{lvl * tab}+ {child['key']}: "
+                answer += f"{format_value(child['new_value'])}"
                 answer += '\n'
 
         # Если ключ содержит вложенные структуры
@@ -91,8 +91,8 @@ def get_answer_str(diff_tree, lvl=1):
             answer += unpack_dict(child['value'], lvl)
             answer += '\n'
         elif child['status'] == 'unchanged':
-            answer += f"{lvl * tab}  {child['key']}: " \
-                      f"{format_value(child['value'])}"
+            answer += f"{lvl * tab}  {child['key']}: "
+            answer += f"{format_value(child['value'])}"
             answer += '\n'
     if lvl == 1:
         answer += '}'
