@@ -1,7 +1,7 @@
 import argparse
 
 
-def argument_parsing():
+def arg_parse():
     """display help information"""
     parser = argparse.ArgumentParser(prog='gendiff',
                                      description='Compares two '

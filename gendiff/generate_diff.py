@@ -1,9 +1,9 @@
 import json
 import yaml
 import os
-from gendiff.stylish import slylish
-from gendiff.plain import plain
-from gendiff.json import f_json
+from gendiff.formaters.stylish import stylish
+from gendiff.formaters.plain import plain
+from gendiff.formaters.json import f_json
 
 
 def parse(data, format):
@@ -49,31 +49,22 @@ def build_tree_structure(files, file_1, file_2):
                     "value": result
                 })
 
+            elif file_1[key] == file_2[key]:
+                # Значения не словари и значения равны
+                diff_tree.append({
+                    "key": key,
+                    "status": 'unchanged',
+                    "value": file_1[key]
+                })
             else:
-                if file_1[key] == file_2[key]:
-                    # Значения не словари и значения равны
-                    diff_tree.append({
-                        "key": key,
-                        "status": 'unchanged',
-                        "value": file_1[key]
-                    })
-                else:
-                    # Если значения не равны
-                    diff_tree.append({
-                        "key": key,
-                        "status": 'changed',
-                        "value": file_1[key],
-                        "value_2": file_2[key]
-                    })
+                # Если значения не равны
+                diff_tree.append({
+                    "key": key,
+                    "status": 'changed',
+                    "value": file_1[key],
+                    "value_2": file_2[key]
+                })
     return diff_tree
-
-
-def get_difference_tree(file_path1, file_path2):
-    files = sorted(list(set(get_data(file_path1).keys())
-                        | set(get_data(file_path2).keys())))
-    file_1 = dict(sorted(get_data(file_path1).items()))
-    file_2 = dict(sorted(get_data(file_path2).items()))
-    return build_tree_structure(files, file_1, file_2)
 
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
@@ -83,7 +74,7 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
     file_2 = dict(sorted(get_data(file_path2).items()))
     result = build_tree_structure(files, file_1, file_2)
     if format_name == 'stylish':
-        return slylish(result)
+        return stylish(result)
     elif format_name == "plain":
         return plain(result)
     elif format_name == 'json':
