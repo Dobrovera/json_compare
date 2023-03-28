@@ -14,18 +14,15 @@ def unpack_dict(d, lvl=1):
     tab = TAB * 2 * ' '
     answer = '{\n'
     for key, val in d.items():
-        if isinstance(val, dict):
-            if lvl == 1:
-                lvl += 1
-                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
-            else:
-                r = f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
-            answer += r
+        if isinstance(val, dict) and lvl == 1:
+            lvl += 1
+            answer += f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
+        elif isinstance(val, dict):
+            answer += f"{(lvl) * tab}{key}: {unpack_dict(val, lvl+1)}"
+        elif lvl == 1:
+            answer += f"{(lvl+1) * tab}{key}: {val}"
         else:
-            if lvl == 1:
-                answer += f"{(lvl+1) * tab}{key}: {val}"
-            else:
-                answer += f"{lvl * tab}{key}: {val}"
+            answer += f"{lvl * tab}{key}: {val}"
         answer += "\n"
     answer += f"{(lvl-1) * tab}" + "}"
     return answer
