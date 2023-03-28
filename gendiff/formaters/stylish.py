@@ -32,29 +32,25 @@ def get_answer_str(diff_tree, lvl=1):
     tab = TAB * " "
     answer = '{\n'
     for child in diff_tree:
-        # Если ключ был удален
-        if child['status'] == 'removed':
-            # И содержит словарь
-            if type(child['value']) is dict:
-                answer += f"{lvl * tab}- {child['key']}: "
-                answer += unpack_dict(child['value'], lvl)
-                answer += '\n'
-            else:
-                answer += f"{lvl * tab}- {child['key']}: " \
-                          f"{format_value(child['value'])}"
-                answer += '\n'
+        # Если ключ был удален И содержит словарь
+        if child['status'] == 'removed' and type(child['value']) is dict:
+            answer += f"{lvl * tab}- {child['key']}: "
+            answer += unpack_dict(child['value'], lvl)
+            answer += '\n'
+        elif child['status'] == 'removed':
+            answer += f"{lvl * tab}- {child['key']}: " \
+                      f"{format_value(child['value'])}"
+            answer += '\n'
 
-        # Если ключ был добавлен во второй файл
-        if child['status'] == 'added':
-            # И содержит словарь
-            if type(child['value']) is dict:
-                answer += f"{lvl * tab}+ {child['key']}: "
-                answer += unpack_dict(child['value'], lvl)
-                answer += '\n'
-            else:
-                answer += f"{lvl * tab}+ {child['key']}: " \
-                          f"{format_value(child['value'])}"
-                answer += '\n'
+        # Если ключ был добавлен во второй файл И содержит словарь
+        if child['status'] == 'added' and type(child['value']) is dict:
+            answer += f"{lvl * tab}+ {child['key']}: "
+            answer += unpack_dict(child['value'], lvl)
+            answer += '\n'
+        elif child['status'] == 'added':
+            answer += f"{lvl * tab}+ {child['key']}: " \
+                      f"{format_value(child['value'])}"
+            answer += '\n'
 
         # Если ключ поменялся
         if child['status'] == 'changed':
@@ -77,29 +73,27 @@ def get_answer_str(diff_tree, lvl=1):
             # Или не содержит словарей
             else:
                 answer += f"{lvl * tab}- {child['key']}: " \
-                          f"{format_value(child['value'])}"
+                      f"{format_value(child['value'])}"
                 answer += '\n'
                 answer += f"{lvl * tab}+ {child['key']}: " \
                           f"{format_value(child['value_2'])}"
                 answer += '\n'
 
-        # Если ключ сожержит вложенные структуры
+        # Если ключ содержит вложенные структуры
         if child['status'] == 'nested':
             answer += f"{lvl * tab}  {child['key']}: "
             answer += get_answer_str(child['value'], lvl + 2)
             answer += '\n'
 
-        # Если ключ не поменялся
-        if child['status'] == 'unchanged':
-            # И содержит словарь
-            if type(child['value']) is dict:
-                answer += f"{lvl * tab}  {child['key']}: "
-                answer += unpack_dict(child['value'], lvl)
-                answer += '\n'
-            else:
-                answer += f"{lvl * tab}  {child['key']}: " \
-                          f"{format_value(child['value'])}"
-                answer += '\n'
+        # Если ключ не поменялся и содержит словарь
+        if child['status'] == 'unchanged' and type(child['value']) is dict:
+            answer += f"{lvl * tab}  {child['key']}: "
+            answer += unpack_dict(child['value'], lvl)
+            answer += '\n'
+        elif child['status'] == 'unchanged':
+            answer += f"{lvl * tab}  {child['key']}: " \
+                      f"{format_value(child['value'])}"
+            answer += '\n'
     if lvl == 1:
         answer += '}'
     else:
