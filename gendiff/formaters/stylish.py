@@ -44,7 +44,7 @@ def get_answer_str(diff_tree, lvl=1):
                 answer += '\n'
             else:
                 answer += f"{lvl * tab}- {child['key']}: " \
-                      f"{format_value(child['value'])}"
+                          f"{format_value(child['value'])}"
                 answer += '\n'
 
         # Если ключ был добавлен во второй файл
