@@ -1,5 +1,3 @@
-import copy
-
 ADDED = "was added with value: "
 REMOVE = "was removed"
 UPDATE = "was updated. From "
@@ -18,45 +16,27 @@ def format_value(value):
         return f"'{value}'"
 
 
-def diff_tree_path(diff_tree_with_path, curr_path=''):
-    for node in diff_tree_with_path:
-        path = curr_path + f"{node['key']}"
-        node['path'] = path
-        if node["status"] == 'nested':
-            path += "."
-            for n in node['value']:
-                if n["status"] == 'nested':
-                    new_path = path + n['key'] + '.'
-                    diff_tree_path(n['value'], curr_path=new_path)
-                else:
-                    new_path = path + n['key']
-                    n['path'] = new_path
-    return diff_tree_with_path
-
-
-def make_answer(diff_tree_with_path, answer=''):
+def make_answer(diff_tree_with_path, answer='', curr_path=''):
     for node in diff_tree_with_path:
         if node['status'] == 'removed':
-            answer += f"{PRO} '{node['path']}' {REMOVE}"
+            answer += f"{PRO} '{curr_path + node['key']}' {REMOVE}"
             answer += "\n"
         elif node['status'] == 'added':
-            answer += f"{PRO} '{node['path']}' {ADDED}" \
+            answer += f"{PRO} '{curr_path + node['key']}' {ADDED}" \
                       f"{format_value(node['value'])}"
             answer += "\n"
         elif node['status'] == 'changed':
-            answer += f"{PRO} '{node['path']}' {UPDATE}" \
+            answer += f"{PRO} '{curr_path + node['key']}' {UPDATE}" \
                       f"{format_value(node['value'])}" \
                       f" to {format_value(node['value_2'])}"
             answer += "\n"
         elif node['status'] == 'nested':
             answer = make_answer(diff_tree_with_path=node['value'],
-                                 answer=answer)
+                                 answer=answer,
+                                 curr_path=curr_path + node['key'] + '.')
     return answer
 
 
 def plain(diff_tree):
-    # Для неизменности diff_tree
-    diff_tree_with_path = copy.deepcopy(diff_tree)
-    new_tree = diff_tree_path(diff_tree_with_path)
-    answer = make_answer(new_tree)
+    answer = make_answer(diff_tree)
     return answer.rstrip()
