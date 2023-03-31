@@ -1,1 +1,0 @@
-[{'key': 'I', 'sign': ' ', 'value': True}, {'key': 'hard', 'sign': '-', 'value': False}, {'key': 'hard', 'sign': '+', 'value': True}, {'key': 'really', 'sign': '-', 'value': 10}, {'key': 'so_much', 'sign': '+', 'value': 10}, {'key': 'try', 'sign': ' ', 'value': 'abc'}]
