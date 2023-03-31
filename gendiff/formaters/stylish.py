@@ -40,12 +40,12 @@ def get_answer_str(diff_tree, lvl=1):
                       f"{format_value(child['value'], lvl)}"
             answer += '\n'
 
-        if child['status'] == 'added':
+        elif child['status'] == 'added':
             answer += f"{lvl * tab}+ {child['key']}: " \
                       f"{format_value(child['value'], lvl)}"
             answer += '\n'
 
-        if child['status'] == 'changed':
+        elif child['status'] == 'changed':
             answer += f"{lvl * tab}- {child['key']}: "
             answer += f"{format_value(child['old_value'], lvl)}"
             answer += '\n'
@@ -53,12 +53,12 @@ def get_answer_str(diff_tree, lvl=1):
             answer += f"{format_value(child['new_value'], lvl)}"
             answer += '\n'
 
-        if child['status'] == 'nested':
+        elif child['status'] == 'nested':
             answer += f"{lvl * tab}  {child['key']}: "
             answer += get_answer_str(child['value'], lvl + 2)
             answer += '\n'
 
-        if child['status'] == 'unchanged':
+        elif child['status'] == 'unchanged':
             answer += f"{lvl * tab}  {child['key']}: "
             answer += f"{format_value(child['value'], lvl)}"
             answer += '\n'
