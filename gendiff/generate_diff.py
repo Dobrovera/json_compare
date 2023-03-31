@@ -1,9 +1,9 @@
 import json
 import yaml
 import os
-from gendiff.formaters.stylish import stylish
-from gendiff.formaters.plain import plain
-from gendiff.formaters.json import f_json
+from gendiff.formaters.stylish import format_stylish
+from gendiff.formaters.plain import format_plain
+from gendiff.formaters.json import format_json
 
 
 def parse(data, format):
@@ -74,8 +74,8 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
     file_2 = dict(sorted(get_data(file_path2).items()))
     result = build_tree_structure(files, file_1, file_2)
     if format_name == 'stylish':
-        return stylish(result)
+        return format_stylish(result)
     elif format_name == "plain":
-        return plain(result)
+        return format_plain(result)
     elif format_name == 'json':
-        return f_json(result)
+        return format_json(result)

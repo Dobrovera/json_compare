@@ -1,11 +1,14 @@
 TAB = 2
 
 
-def format_value(value):
+def format_value(value, lvl=1):
     if value in [True, False]:
         return str(value).lower()
     elif value is None:
         return 'null'
+    elif isinstance(value, dict):
+        answer = unpack_dict(value, lvl)
+        return answer
     else:
         return value
 
@@ -32,67 +35,32 @@ def get_answer_str(diff_tree, lvl=1):
     tab = TAB * " "
     answer = '{\n'
     for child in diff_tree:
-        # Если ключ был удален И содержит словарь
-        if child['status'] == 'removed' and type(child['value']) is dict:
-            answer += f"{lvl * tab}- {child['key']}: "
-            answer += unpack_dict(child['value'], lvl)
-            answer += '\n'
-        elif child['status'] == 'removed':
+        if child['status'] == 'removed':
             answer += f"{lvl * tab}- {child['key']}: " \
-                      f"{format_value(child['value'])}"
+                      f"{format_value(child['value'], lvl)}"
             answer += '\n'
 
-        # Если ключ был добавлен во второй файл И содержит словарь
-        if child['status'] == 'added' and type(child['value']) is dict:
-            answer += f"{lvl * tab}+ {child['key']}: "
-            answer += unpack_dict(child['value'], lvl)
-            answer += '\n'
-        elif child['status'] == 'added':
+        if child['status'] == 'added':
             answer += f"{lvl * tab}+ {child['key']}: " \
-                      f"{format_value(child['value'])}"
+                      f"{format_value(child['value'], lvl)}"
             answer += '\n'
 
-        # Если ключ поменялся
         if child['status'] == 'changed':
-            # И содержит словарь в первом файле
-            if type(child['old_value']) is dict:
-                answer += f"{lvl * tab}- {child['key']}: "
-                answer += unpack_dict(child['old_value'], lvl)
-                answer += '\n'
-                answer += f"{lvl * tab}+ {child['key']}: "
-                answer += f"{format_value(child['new_value'])}"
-                answer += '\n'
-            # Или во втором
-            elif type(child['new_value']) is dict:
-                answer += f"{lvl * tab}- {child['key']}: "
-                answer += f"{format_value(child['old_value'])}"
-                answer += '\n'
-                answer += f"{lvl * tab}+ {child['key']}: "
-                answer += unpack_dict(child['new_value'], lvl)
-                answer += '\n'
-            # Или не содержит словарей
-            else:
-                answer += f"{lvl * tab}- {child['key']}: "
-                answer += f"{format_value(child['old_value'])}"
-                answer += '\n'
-                answer += f"{lvl * tab}+ {child['key']}: "
-                answer += f"{format_value(child['new_value'])}"
-                answer += '\n'
+            answer += f"{lvl * tab}- {child['key']}: "
+            answer += f"{format_value(child['old_value'], lvl)}"
+            answer += '\n'
+            answer += f"{lvl * tab}+ {child['key']}: "
+            answer += f"{format_value(child['new_value'], lvl)}"
+            answer += '\n'
 
-        # Если ключ содержит вложенные структуры
         if child['status'] == 'nested':
             answer += f"{lvl * tab}  {child['key']}: "
             answer += get_answer_str(child['value'], lvl + 2)
             answer += '\n'
 
-        # Если ключ не поменялся и содержит словарь
-        if child['status'] == 'unchanged' and type(child['value']) is dict:
+        if child['status'] == 'unchanged':
             answer += f"{lvl * tab}  {child['key']}: "
-            answer += unpack_dict(child['value'], lvl)
-            answer += '\n'
-        elif child['status'] == 'unchanged':
-            answer += f"{lvl * tab}  {child['key']}: "
-            answer += f"{format_value(child['value'])}"
+            answer += f"{format_value(child['value'], lvl)}"
             answer += '\n'
     if lvl == 1:
         answer += '}'
@@ -101,5 +69,5 @@ def get_answer_str(diff_tree, lvl=1):
     return answer
 
 
-def stylish(diff_tree):
+def format_stylish(diff_tree):
     return get_answer_str(diff_tree)

@@ -37,6 +37,6 @@ def make_answer(diff_tree_with_path, answer='', curr_path=''):
     return answer
 
 
-def plain(diff_tree):
+def format_plain(diff_tree):
     answer = make_answer(diff_tree)
     return answer.rstrip()
